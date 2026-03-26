@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Cadastro</h2>
+
+<input id="nome" placeholder="Nome"><br>
+<input id="idade" placeholder="Idade"><br>
+<input id="cpf" placeholder="CPF"><br>
+
+<button onclick="enviar()">Cadastrar</button>
+
+<script>
+const API = 'https://sistema-escola-2njr.onrender.com';
+
+async function enviar() {
+  await fetch(API + '/cadastro', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      nomeAluno: nome.value,
+      idadeAluno: parseInt(idade.value),
+      cpfAluno: cpf.value
+    })
+  });
+
+  alert('Cadastrado!');
+}
+</script>
+
+</body>
+</html>
