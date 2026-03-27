@@ -12,7 +12,10 @@
 <input id="cpf" placeholder="CPF"><br>
 <input id="instituicao" placeholder="Instituição"><br>
 <input id="turno" placeholder="Turno"><br>
-
+  
+<input id="numeroAluno" placeholder="Número do aluno"><br>
+<input id="numeroResponsavel" placeholder="Número do responsável"><br>
+<input id="imagem" placeholder="Link da imagem"><br>
 <button onclick="cadastrar()">Cadastrar</button>
 
 <hr>
@@ -34,12 +37,15 @@ async function cadastrar() {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        nomeAluno: nome.value,
-        idadeAluno: parseInt(idade.value),
-        cpfAluno: cpf.value,
-        instituicao: instituicao.value,
-        turno: turno.value
-      })
+  nomeAluno: nome.value,
+  idadeAluno: parseInt(idade.value),
+  cpfAluno: cpf.value,
+  instituicao: instituicao.value,
+  turno: turno.value,
+  numeroAluno: numeroAluno.value,
+  numeroResponsavel: numeroResponsavel.value,
+  imagem: imagem.value
+})
     });
 
     alert(await res.text());
@@ -79,8 +85,14 @@ async function carregar() {
   let html = '<h3>Alunos:</h3>';
 
   dados.forEach(a => {
-    html += `<p>${a.nomeAluno} - ${a.instituicao} - ${a.turno}</p>`;
-  });
+  html += `
+  <div style="border:1px solid black; margin:10px; padding:10px;">
+    <p>${a.nomeAluno}</p>
+    <p>${a.numeroAluno}</p>
+    <p>${a.numeroResponsavel}</p>
+    <img src="${a.imagem}" width="100">
+  </div>
+`;
 
   painel.innerHTML = html;
 }
