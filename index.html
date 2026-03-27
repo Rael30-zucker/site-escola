@@ -17,15 +17,13 @@ const API = 'https://sistema-escola-2njr.onrender.com';
 async function cadastrar() {
   try {
     const res = await fetch(API + '/cadastro', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        nomeAluno: nome.value,
-        idadeAluno: parseInt(idade.value),
-        cpfAluno: cpf.value
-      })
-    });
-
+   body: JSON.stringify({
+  nomeAluno: nome.value,
+  idadeAluno: parseInt(idade.value),
+  cpfAluno: cpf.value,
+  instituicao: instituicao.value,
+  turno: turno.value
+})
     const texto = await res.text();
     alert(texto);
 
@@ -84,10 +82,3 @@ async function carregar() {
     console.error(err);
   }
 }
-body: JSON.stringify({
-  nomeAluno: nome.value,
-  idadeAluno: parseInt(idade.value),
-  cpfAluno: cpf.value,
-  instituicao: instituicao.value,
-  turno: turno.value
-})
