@@ -46,16 +46,29 @@ async function login() {
 }
 
 async function carregar() {
-  const res = await fetch(API + '/alunos');
-  const dados = await res.json();
+  try {
+    const res = await fetch(API + '/alunos');
 
-  let html = '<h3>Alunos:</h3>';
+    if (!res.ok) {
+      throw new Error('Erro ao buscar alunos');
+    }
 
-  dados.forEach(a => {
-    html += `<p>${a.nomeAluno}</p>`;
-  });
+    const dados = await res.json();
 
-  painel.innerHTML = html;
+    let html = '<h3>Alunos:</h3>';
+
+    if (dados.length === 0) {
+      html += '<p>Nenhum aluno cadastrado</p>';
+    }
+
+    dados.forEach(a => {
+      html += `<p>${a.nomeAluno}</p>`;
+    });
+
+    painel.innerHTML = html;
+
+  } catch (err) {
+    painel.innerHTML = '<p>Erro ao carregar alunos</p>';
+    console.error(err);
+  }
 }
-</script></body>
-</html>
