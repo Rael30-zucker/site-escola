@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<h2>Cadastro</h2>
-
-<input id="nome" placeholder="Nome"><br>
+<!DOCTYPE html><html>
+<body><h2>Cadastro</h2><input id="nome" placeholder="Nome"><br>
 <input id="idade" placeholder="Idade"><br>
 <input id="cpf" placeholder="CPF"><br>
 
-<button onclick="enviar()">Cadastrar</button>
+<button onclick="cadastrar()">Cadastrar</button>
 
-<script>
-const API = 'https://sistema-escola-2njr.onrender.com';
+<hr><h3>Login ADM</h3><input id="user" placeholder="Usuário"><br>
+<input id="pass" type="password" placeholder="Senha"><br>
 
-async function enviar() {
+<button onclick="login()">Entrar</button>
+
+<div id="painel"></div><script>
+const API = 'https://sistema-escola-2njr.onrender.com/';
+
+async function cadastrar() {
   await fetch(API + '/cadastro', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
@@ -26,7 +26,36 @@ async function enviar() {
 
   alert('Cadastrado!');
 }
-</script>
 
-</body>
+async function login() {
+  const res = await fetch(API + '/login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      user: user.value,
+      pass: pass.value
+    })
+  });
+
+  if (res.ok) {
+    alert('Logado!');
+    carregar();
+  } else {
+    alert('Erro no login');
+  }
+}
+
+async function carregar() {
+  const res = await fetch(API + '/alunos');
+  const dados = await res.json();
+
+  let html = '<h3>Alunos:</h3>';
+
+  dados.forEach(a => {
+    html += `<p>${a.nomeAluno}</p>`;
+  });
+
+  painel.innerHTML = html;
+}
+</script></body>
 </html>
