@@ -63,8 +63,7 @@ async function carregar() {
     }
 
     dados.forEach(a => {
-      html += `<p>${a.nomeAluno}</p>`;
-    });
+   html += `<p>${a.nomeAluno} - ${a.instituicao} - ${a.turno}</p>`;
 
     painel.innerHTML = html;
 
