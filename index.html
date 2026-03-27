@@ -2,7 +2,8 @@
 <body><h2>Cadastro</h2><input id="nome" placeholder="Nome"><br>
 <input id="idade" placeholder="Idade"><br>
 <input id="cpf" placeholder="CPF"><br>
-
+<input id="instituicao" placeholder="Instituição"><br>
+<input id="turno" placeholder="Turno"><br>
 <button onclick="cadastrar()">Cadastrar</button>
 
 <hr><h3>Login ADM</h3><input id="user" placeholder="Usuário"><br>
@@ -72,3 +73,10 @@ async function carregar() {
     console.error(err);
   }
 }
+body: JSON.stringify({
+  nomeAluno: nome.value,
+  idadeAluno: parseInt(idade.value),
+  cpfAluno: cpf.value,
+  instituicao: instituicao.value,
+  turno: turno.value
+})
