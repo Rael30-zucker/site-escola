@@ -15,7 +15,7 @@
   
 <input id="numeroAluno" placeholder="Número do aluno"><br>
 <input id="numeroResponsavel" placeholder="Número do responsável"><br>
-<input id="imagem" placeholder="Link da imagem"><br>
+<input id="imagem" placeholder="Link da imagem">
 <button onclick="cadastrar()">Cadastrar</button>
 
 <hr>
@@ -32,26 +32,28 @@
 const API = 'https://sistema-escola-2njr.onrender.com';
 
 async function cadastrar() {
+  const file = document.getElementById('imagem').files[0];
+
+  const formData = new FormData();
+  formData.append('nomeAluno', nome.value);
+  formData.append('idadeAluno', idade.value);
+  formData.append('cpfAluno', cpf.value);
+  formData.append('instituicao', instituicao.value);
+  formData.append('turno', turno.value);
+  formData.append('numeroAluno', numeroAluno.value);
+  formData.append('numeroResponsavel', numeroResponsavel.value);
+  formData.append('imagem', file);
+
   try {
     const res = await fetch(API + '/cadastro', {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-  nomeAluno: nome.value,
-  idadeAluno: parseInt(idade.value),
-  cpfAluno: cpf.value,
-  instituicao: instituicao.value,
-  turno: turno.value,
-  numeroAluno: numeroAluno.value,
-  numeroResponsavel: numeroResponsavel.value,
-  imagem: imagem.value
-})
+      body: formData
     });
 
     alert(await res.text());
 
   } catch {
-    alert('Erro ao conectar');
+    alert('Erro ao enviar');
   }
 }
 
