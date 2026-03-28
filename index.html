@@ -63,8 +63,8 @@ async function login() {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        user: user.value,
-        pass: pass.value
+        user: document.getElementById('user').value,
+        pass: document.getElementById('pass').value
       })
     });
 
@@ -75,7 +75,7 @@ async function login() {
       alert('Erro no login');
     }
 
-  } catch {
+  } catch (err) {
     alert('Servidor offline');
   }
 }
