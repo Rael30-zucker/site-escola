@@ -10,8 +10,26 @@
 <button onclick="login()">Entrar</button>
 
 <script>
-function login() {
+async function login() {
   alert('clicou login');
+
+  try {
+    const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user: user.value,
+        pass: pass.value
+      })
+    });
+
+    const texto = await res.text();
+
+    alert(texto);
+
+  } catch (err) {
+    alert('Erro ao conectar');
+  }
 }
 </script>
 
