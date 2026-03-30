@@ -38,13 +38,24 @@ async function login() {
 }
 
 async function carregar() {
+async function carregar() {
   const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
   const dados = await res.json();
 
-  let html = '';
+  let html = '<h3>Alunos:</h3>';
 
   dados.forEach(a => {
-    html += '<p>' + a.nomeAluno + '</p>';
+    html += `
+      <div style="border:1px solid #000; margin:10px; padding:10px;">
+        <p><b>Nome:</b> ${a.nomeAluno}</p>
+        <p><b>Responsável:</b> ${a.nomeResponsavel || 'Não informado'}</p>
+        <p><b>Telefone Aluno:</b> ${a.telefoneAluno || 'Não informado'}</p>
+        <p><b>Telefone Responsável:</b> ${a.telefoneResponsavel || 'Não informado'}</p>
+        <p><b>CPF Aluno:</b> ${a.cpfAluno}</p>
+        <p><b>CPF Responsável:</b> ${a.cpfResponsavel || 'Não informado'}</p>
+        <p><b>Turno:</b> ${a.turno}</p>
+      </div>
+    `;
   });
 
   document.getElementById('painel').innerHTML = html;
