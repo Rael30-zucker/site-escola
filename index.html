@@ -39,14 +39,18 @@ async function cadastrar() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nomeAluno: document.getElementById('nome').value,
-        cpfAluno: document.getElementById('cpf').value,
-        nomeResponsavel: document.getElementById('nomeResponsavel').value,
-        cpfResponsavel: document.getElementById('cpfResponsavel').value,
-        telefoneAluno: document.getElementById('telefoneAluno').value,
-        telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
-        turno: 'Noturno'
-      })
+  nomeAluno: document.getElementById('nome').value,
+  cpfAluno: document.getElementById('cpf').value,
+  nomeResponsavel: document.getElementById('nomeResponsavel').value,
+  cpfResponsavel: document.getElementById('cpfResponsavel').value,
+  telefoneAluno: document.getElementById('telefoneAluno').value,
+  telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
+
+  fotoInstituicao: document.getElementById('fotoInstituicao').value,
+  fotoAcademia: document.getElementById('fotoAcademia').value,
+
+  turno: 'Noturno'
+})
     });
 
     alert(await res.text());
