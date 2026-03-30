@@ -8,7 +8,7 @@
 <input id="pass" placeholder="Senha"><br>
 
 <button onclick="login()">Entrar</button>
-
+<div id="painel"></div>
 <script>
 async function login() {
   try {
@@ -35,6 +35,31 @@ async function login() {
   }
 }
 </script>
+<script>
+async function carregar() {
+  const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
+  const dados = await res.json();
 
+  let html = '';
+
+  dados.forEach(a => {
+    html += '<p>' + a.nomeAluno + '</p>';
+  });
+
+  document.getElementById('painel').innerHTML = html;
+}
+</script>
+  async function carregar() {
+  const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
+  const dados = await res.json();
+
+  let html = '<h3>Alunos:</h3>';
+
+  dados.forEach(a => {
+    html += `<p>${a.nomeAluno}</p>`;
+  });
+
+  document.getElementById('painel').innerHTML = html;
+}
 </body>
 </html>
