@@ -1,105 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Sistema Escola</title>
-</head>
 <body>
 
-<h2>Cadastro</h2>
-<input id="nome" placeholder="Nome"><br>
-<input id="idade" placeholder="Idade"><br>
-<input id="cpf" placeholder="CPF"><br>
-<input id="instituicao" placeholder="Instituição"><br>
-<input id="turno" placeholder="Turno"><br>
-  
-<input id="numeroAluno" placeholder="Número do aluno"><br>
-<input id="numeroResponsavel" placeholder="Número do responsável"><br>
-<input id="imagem" placeholder="Link da imagem">
-<button onclick="cadastrar()">Cadastrar</button>
+<h2>Teste</h2>
 
-<hr>
-
-<h3>Login ADM</h3>
 <input id="user" placeholder="Usuário"><br>
-<input id="pass" type="password" placeholder="Senha"><br>
+<input id="pass" placeholder="Senha"><br>
 
 <button onclick="login()">Entrar</button>
-<button onclick="alert('teste')">TESTE</button>
-<div id="painel"></div>
 
 <script>
-const API = 'https://sistema-escola-2njr.onrender.com';
-
-async function cadastrar() {
-  const file = document.getElementById('imagem').files[0];
-
-  const formData = new FormData();
-  formData.append('nomeAluno', nome.value);
-  formData.append('idadeAluno', idade.value);
-  formData.append('cpfAluno', cpf.value);
-  formData.append('instituicao', instituicao.value);
-  formData.append('turno', turno.value);
-  formData.append('numeroAluno', numeroAluno.value);
-  formData.append('numeroResponsavel', numeroResponsavel.value);
-  formData.append('imagem', file);
-
-  try {
-    const res = await fetch(API + '/cadastro', {
-      method: 'POST',
-      body: formData
-    });
-
-    alert(await res.text());
-
-  } catch {
-    alert('Erro ao enviar');
-  }
-}
-async function login() {
+function login() {
   alert('clicou login');
-
-  try {
-    const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user: document.getElementById('user').value,
-        pass: document.getElementById('pass').value
-      })
-    });
-
-    const data = await res.json();
-
-    alert('resposta: ' + JSON.stringify(data));
-
-    if (data.ok) {
-      carregar();
-    }
-
-  } catch (err) {
-    alert('erro conexão');
-    console.error(err);
-  }
-}
-
-async function carregar() {
-  const res = await fetch(API + '/alunos');
-  const dados = await res.json();
-
-  let html = '<h3>Alunos:</h3>';
-
-  dados.forEach(a => {
-  html += `
-  <div style="border:1px solid black; margin:10px; padding:10px;">
-    <p>${a.nomeAluno}</p>
-    <p>${a.numeroAluno}</p>
-    <p>${a.numeroResponsavel}</p>
-    <img src="${a.imagem}" width="100">
-  </div>
-`;
-
-  painel.innerHTML = html;
 }
 </script>
 
