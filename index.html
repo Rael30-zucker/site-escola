@@ -57,6 +57,8 @@ async function cadastrar() {
   }
 }
 async function login() {
+  alert('clicou login');
+
   try {
     const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
       method: 'POST',
@@ -69,15 +71,14 @@ async function login() {
 
     const data = await res.json();
 
+    alert('resposta: ' + JSON.stringify(data));
+
     if (data.ok) {
-      alert('Logado!');
       carregar();
-    } else {
-      alert('Login inválido');
     }
 
   } catch (err) {
-    alert('Erro de conexão');
+    alert('erro conexão');
     console.error(err);
   }
 }
