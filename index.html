@@ -56,25 +56,32 @@ async function cadastrar() {
     alert('Erro ao enviar');
   }
 }
-
 async function login() {
   try {
-    const res = await fetch(API + '/login', {
+    const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         user: document.getElementById('user').value,
         pass: document.getElementById('pass').value
       })
     });
 
-    const texto = await res.text();
-    alert('Resposta: ' + texto);
+    const data = await res.json();
+
+    if (data.ok) {
+      alert('Logado!');
+      carregar();
+    } else {
+      alert('Login inválido');
+    }
 
   } catch (err) {
-    alert('Erro: servidor não respondeu');
+    alert('Erro de conexão');
+    console.error(err);
   }
 }
+
 async function carregar() {
   const res = await fetch(API + '/alunos');
   const dados = await res.json();
