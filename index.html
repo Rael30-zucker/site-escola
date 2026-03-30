@@ -15,14 +15,16 @@
 <div id="painel"></div>
 
 <script>
-  <h2>Cadastro</h2>
+<h2>Cadastro</h2>
 
 <input id="nome" placeholder="Nome do aluno"><br>
-<input id="cpf" placeholder="CPF do aluno"><br>
 <input id="nomeResponsavel" placeholder="Nome do responsável"><br>
+
 <input id="cpfResponsavel" placeholder="CPF do responsável"><br>
-<input id="telefoneAluno" placeholder="Telefone do aluno"><br>
+<input id="cpf" placeholder="CPF do aluno"><br>
+
 <input id="telefoneResponsavel" placeholder="Telefone do responsável"><br>
+<input id="telefoneAluno" placeholder="Telefone do aluno"><br>
 
 <button onclick="cadastrar()">Cadastrar</button>
 async function login() {
@@ -72,7 +74,14 @@ async function cadastrar() {
     alert('Erro ao cadastrar');
   }
 }
-async function carregar() {
+  <hr>
+
+<h2>Área do Administrador</h2>
+
+<input id="user" placeholder="Usuário"><br>
+<input id="pass" type="password" placeholder="Senha"><br>
+
+<button onclick="login()">Entrar</button>
 async function carregar() {
   const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
   const dados = await res.json();
@@ -81,13 +90,16 @@ async function carregar() {
 
   dados.forEach(a => {
     html += `
-      <div style="border:1px solid #000; margin:10px; padding:10px;">
-        <p><b>Nome:</b> ${a.nomeAluno}</p>
-        <p><b>Responsável:</b> ${a.nomeResponsavel || 'Não informado'}</p>
-        <p><b>Telefone Aluno:</b> ${a.telefoneAluno || 'Não informado'}</p>
-        <p><b>Telefone Responsável:</b> ${a.telefoneResponsavel || 'Não informado'}</p>
+      <div style="border:1px solid black; padding:10px; margin:10px;">
+        <p><b>Aluno:</b> ${a.nomeAluno}</p>
+        <p><b>Responsável:</b> ${a.nomeResponsavel}</p>
+
+        <p><b>CPF Responsável:</b> ${a.cpfResponsavel}</p>
         <p><b>CPF Aluno:</b> ${a.cpfAluno}</p>
-        <p><b>CPF Responsável:</b> ${a.cpfResponsavel || 'Não informado'}</p>
+
+        <p><b>Tel Responsável:</b> ${a.telefoneResponsavel}</p>
+        <p><b>Tel Aluno:</b> ${a.telefoneAluno}</p>
+
         <p><b>Turno:</b> ${a.turno}</p>
       </div>
     `;
