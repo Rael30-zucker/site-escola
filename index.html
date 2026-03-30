@@ -68,18 +68,13 @@ async function login() {
       })
     });
 
-    if (res.ok) {
-      alert('Logado!');
-      carregar();
-    } else {
-      alert('Erro no login');
-    }
+    const texto = await res.text();
+    alert('Resposta: ' + texto);
 
   } catch (err) {
-    alert('Servidor offline');
+    alert('Erro: servidor não respondeu');
   }
 }
-
 async function carregar() {
   const res = await fetch(API + '/alunos');
   const dados = await res.json();
