@@ -108,6 +108,28 @@ async function carregar() {
 
   document.getElementById('painel').innerHTML = html;
 }
+  async function excluir(id) {
+  await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
+    method: 'DELETE'
+  });
+
+  alert('Excluído!');
+  carregar();
+  }
+  async function editar(id) {
+  const novoNome = prompt('Novo nome:');
+
+  await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nomeAluno: novoNome
+    })
+  });
+
+  alert('Atualizado!');
+  carregar();
+  }
 </script>
 
 </body>
