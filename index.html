@@ -15,6 +15,16 @@
 <div id="painel"></div>
 
 <script>
+  <h2>Cadastro</h2>
+
+<input id="nome" placeholder="Nome do aluno"><br>
+<input id="cpf" placeholder="CPF do aluno"><br>
+<input id="nomeResponsavel" placeholder="Nome do responsável"><br>
+<input id="cpfResponsavel" placeholder="CPF do responsável"><br>
+<input id="telefoneAluno" placeholder="Telefone do aluno"><br>
+<input id="telefoneResponsavel" placeholder="Telefone do responsável"><br>
+
+<button onclick="cadastrar()">Cadastrar</button>
 async function login() {
   try {
     const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
@@ -39,7 +49,29 @@ async function login() {
     alert('Erro ao conectar');
   }
 }
+async function cadastrar() {
+  try {
+    const res = await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nomeAluno: document.getElementById('nome').value,
+        cpfAluno: document.getElementById('cpf').value,
+        nomeResponsavel: document.getElementById('nomeResponsavel').value,
+        cpfResponsavel: document.getElementById('cpfResponsavel').value,
+        telefoneAluno: document.getElementById('telefoneAluno').value,
+        telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
+        turno: 'Noturno'
+      })
+    });
 
+    const texto = await res.text();
+    alert(texto);
+
+  } catch (err) {
+    alert('Erro ao cadastrar');
+  }
+}
 async function carregar() {
 async function carregar() {
   const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
