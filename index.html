@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
+
 <h1>TESTE NOVO</h1>
-<h2>Teste</h2>
 
 <input id="user" placeholder="Usuário"><br>
 <input id="pass" placeholder="Senha"><br>
 
 <button onclick="login()">Entrar</button>
+
 <div id="painel"></div>
+
 <script>
 async function login() {
   try {
@@ -24,18 +26,17 @@ async function login() {
     const data = await res.json();
 
     if (data.ok) {
-      alert('Logado com sucesso!');
-      carregar(); // 🔥 AQUI MOSTRA OS ALUNOS
+      alert('Logado!');
+      carregar();
     } else {
-      alert('Login inválido');
+      alert('Erro no login');
     }
 
   } catch (err) {
-    alert('Erro ao conectar com servidor');
+    alert('Erro ao conectar');
   }
 }
-</script>
-<script>
+
 async function carregar() {
   const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
   const dados = await res.json();
@@ -49,17 +50,6 @@ async function carregar() {
   document.getElementById('painel').innerHTML = html;
 }
 </script>
-  async function carregar() {
-  const res = await fetch('https://sistema-escola-2njr.onrender.com/alunos');
-  const dados = await res.json();
 
-  let html = '<h3>Alunos:</h3>';
-
-  dados.forEach(a => {
-    html += `<p>${a.nomeAluno}</p>`;
-  });
-
-  document.getElementById('painel').innerHTML = html;
-}
 </body>
 </html>
