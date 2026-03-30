@@ -14,21 +14,25 @@ async function login() {
   alert('clicou login');
 
   try {
+    alert('indo conectar...');
+
     const res = await fetch('https://sistema-escola-2njr.onrender.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        user: user.value,
-        pass: pass.value
+        user: document.getElementById('user').value,
+        pass: document.getElementById('pass').value
       })
     });
 
+    alert('conectou');
+
     const texto = await res.text();
 
-    alert(texto);
+    alert('RESPOSTA: ' + texto);
 
   } catch (err) {
-    alert('Erro ao conectar');
+    alert('ERRO: ' + err.message);
   }
 }
 </script>
