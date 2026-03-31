@@ -93,18 +93,46 @@ async function carregar() {
   let html = '<h3>Alunos:</h3>';
 
   dados.forEach(a => {
-  html += `
-    <div style="border:1px solid black; margin:10px; padding:10px;">
-      <p>${a.nomeAluno}</p>
+    html += `
+      <div style="border:1px solid black; margin:10px; padding:10px;">
+        
+        <p onclick="verDetalhes('${a._id}')" style="cursor:pointer;">
+          <b>${a.nomeAluno}</b> (clique para ver)
+        </p>
 
-      <button onclick="editar('${a._id}')">Editar</button>
-      <button onclick="excluir('${a._id}')">Excluir</button>
-    </div>
-  `;
-});
+        <div id="detalhe-${a._id}" style="display:none;">
+          <p>Responsável: ${a.nomeResponsavel}</p>
+          <p>CPF Responsável: ${a.cpfResponsavel}</p>
+          <p>CPF Aluno: ${a.cpfAluno}</p>
+          <p>Tel Responsável: ${a.telefoneResponsavel}</p>
+          <p>Tel Aluno: ${a.telefoneAluno}</p>
+          <p>Turno: ${a.turno}</p>
+
+          <p>Colégio:</p>
+          <img src="${a.fotoInstituicao}" width="100"><br>
+
+          <p>Academia:</p>
+          <img src="${a.fotoAcademia}" width="100"><br>
+
+          <button onclick="editar('${a._id}')">Editar</button>
+          <button onclick="excluir('${a._id}')">Excluir</button>
+        </div>
+
+      </div>
+    `;
+  });
 
   document.getElementById('painel').innerHTML = html;
 }
+  function verDetalhes(id) {
+  const div = document.getElementById('detalhe-' + id);
+
+  if (div.style.display === 'none') {
+    div.style.display = 'block';
+  } else {
+    div.style.display = 'none';
+  }
+  }
   async function excluir(id) {
   await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
     method: 'DELETE'
