@@ -87,7 +87,8 @@
 
   <input id="nome" placeholder="Nome do aluno">
   <input id="nomeResponsavel" placeholder="Nome do responsável">
-
+<input id="idadeAluno" placeholder="Idade do aluno"><br>
+<input id="idadeResponsavel" placeholder="Idade do responsável"><br>
   <input id="cpfResponsavel" placeholder="CPF do responsável">
   <input id="cpf" placeholder="CPF do aluno">
 
@@ -117,6 +118,8 @@ async function cadastrar() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+       idadeAluno: document.getElementById('idadeAluno').value,
+idadeResponsavel: document.getElementById('idadeResponsavel').value,
         nomeAluno: document.getElementById('nome').value,
         cpfAluno: document.getElementById('cpf').value,
         nomeResponsavel: document.getElementById('nomeResponsavel').value,
@@ -179,7 +182,8 @@ async function carregar() {
           <p>Tel Responsável: ${a.telefoneResponsavel}</p>
           <p>Tel Aluno: ${a.telefoneAluno}</p>
           <p>Turno: ${a.turno}</p>
-
+<p>Idade Aluno: ${a.idadeAluno}</p>
+<p>Idade Responsável: ${a.idadeResponsavel}</p>
           <button onclick="editar('${a._id}')">Editar</button>
           <button onclick="excluir('${a._id}')">Excluir</button>
         </div>
