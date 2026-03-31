@@ -1,66 +1,133 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Escola Karatê - Matrícula</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f4f4f4;
+      text-align: center;
+    }
+
+    .topo {
+      background: #222;
+      color: white;
+      padding: 20px;
+    }
+
+    .imagens {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px;
+    }
+
+    .imagens img {
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 90%;
+      padding: 8px;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      width: 95%;
+      background: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+
 <body>
-<h1>Escola / Matrícula</h1>
 
-<p>Colégio:</p>
-<img src="https://i.imgur.com/p0e3xjY.jpeg" width="200"><br>
+<!-- 🔝 TOPO -->
+<div class="topo">
+  <h1>Escola & Karatê</h1>
+  <p>Sistema de Matrícula</p>
+</div>
 
-<p>Academia de Karatê:</p>
-<img src="https://i.imgur.com/QRCaVGJ.png" width="200"><br>
+<!-- 🖼️ IMAGENS FIXAS -->
+<div class="imagens">
+  <div>
+    <p>Colégio</p>
+    <img src="https://i.imgur.com/p0e3xjY.jpeg">
+  </div>
 
-<hr>
-<h1>TESTE NOVO</h1>
+  <div>
+    <p>Karatê</p>
+    <img src="https://i.imgur.com/QRCaVGJ.png">
+  </div>
+</div>
 
-<!-- 🔹 CADASTRO -->
-<h2>Cadastro de Aluno</h2>
+<!-- 📝 CADASTRO -->
+<div class="box">
+  <h2>Cadastro de Aluno</h2>
 
-<input id="nome" placeholder="Nome do aluno"><br>
-<input id="nomeResponsavel" placeholder="Nome do responsável"><br>
+  <input id="nome" placeholder="Nome do aluno">
+  <input id="nomeResponsavel" placeholder="Nome do responsável">
 
-<input id="cpfResponsavel" placeholder="CPF do responsável"><br>
-<input id="cpf" placeholder="CPF do aluno"><br>
+  <input id="cpfResponsavel" placeholder="CPF do responsável">
+  <input id="cpf" placeholder="CPF do aluno">
 
-<input id="telefoneResponsavel" placeholder="Telefone do responsável"><br>
-<input id="telefoneAluno" placeholder="Telefone do aluno"><br>
+  <input id="telefoneResponsavel" placeholder="Telefone do responsável">
+  <input id="telefoneAluno" placeholder="Telefone do aluno">
 
-<button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="cadastrar()">Cadastrar</button>
+</div>
 
-<hr>
+<!-- 🔐 LOGIN ADM -->
+<div class="box">
+  <h2>Área do Administrador</h2>
 
-<!-- 🔐 ÁREA ADM -->
-<h2>Área do Administrador</h2>
+  <input id="user" placeholder="Usuário">
+  <input id="pass" type="password" placeholder="Senha">
 
-<input id="user" placeholder="Usuário"><br>
-<input id="pass" type="password" placeholder="Senha"><br>
+  <button onclick="login()">Entrar</button>
+</div>
 
-<button onclick="login()">Entrar</button>
-
-<hr>
-
+<!-- 📊 PAINEL -->
 <div id="painel"></div>
 
 <script>
 async function cadastrar() {
   try {
-    const res = await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
+    await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-  nomeAluno: document.getElementById('nome').value,
-  cpfAluno: document.getElementById('cpf').value,
-  nomeResponsavel: document.getElementById('nomeResponsavel').value,
-  cpfResponsavel: document.getElementById('cpfResponsavel').value,
-  telefoneAluno: document.getElementById('telefoneAluno').value,
-  telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
-
-  
-  turno: 'Noturno'
-})
+        nomeAluno: document.getElementById('nome').value,
+        cpfAluno: document.getElementById('cpf').value,
+        nomeResponsavel: document.getElementById('nomeResponsavel').value,
+        cpfResponsavel: document.getElementById('cpfResponsavel').value,
+        telefoneAluno: document.getElementById('telefoneAluno').value,
+        telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
+        turno: 'Noturno'
+      })
     });
 
-    alert(await res.text());
-
+    alert('Cadastrado com sucesso!');
   } catch {
     alert('Erro ao cadastrar');
   }
@@ -113,12 +180,6 @@ async function carregar() {
           <p>Tel Aluno: ${a.telefoneAluno}</p>
           <p>Turno: ${a.turno}</p>
 
-          <p>Colégio:</p>
-          <img src="${a.fotoInstituicao}" width="100"><br>
-
-          <p>Academia:</p>
-          <img src="${a.fotoAcademia}" width="100"><br>
-
           <button onclick="editar('${a._id}')">Editar</button>
           <button onclick="excluir('${a._id}')">Excluir</button>
         </div>
@@ -129,24 +190,22 @@ async function carregar() {
 
   document.getElementById('painel').innerHTML = html;
 }
-  function verDetalhes(id) {
-  const div = document.getElementById('detalhe-' + id);
 
-  if (div.style.display === 'none') {
-    div.style.display = 'block';
-  } else {
-    div.style.display = 'none';
-  }
-  }
-  async function excluir(id) {
+function verDetalhes(id) {
+  const div = document.getElementById('detalhe-' + id);
+  div.style.display = div.style.display === 'none' ? 'block' : 'none';
+}
+
+async function excluir(id) {
   await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
     method: 'DELETE'
   });
 
   alert('Excluído!');
   carregar();
-  }
-  async function editar(id) {
+}
+
+async function editar(id) {
   const novoNome = prompt('Novo nome:');
 
   await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
@@ -159,7 +218,7 @@ async function carregar() {
 
   alert('Atualizado!');
   carregar();
-  }
+}
 </script>
 
 </body>
