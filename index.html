@@ -119,9 +119,9 @@ async function cadastrar() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         nomeAluno: document.getElementById('nome').value,
-        idadeAluno: document.getElementById('idadeAluno')?.value,
         nomeResponsavel: document.getElementById('nomeResponsavel').value,
-        idadeResponsavel: document.getElementById('idadeResponsavel')?.value,
+        idadeAluno: Number(document.getElementById('idadeAluno').value),
+idadeResponsavel: Number(document.getElementById('idadeResponsavel').value),
         cpfAluno: document.getElementById('cpf').value,
         cpfResponsavel: document.getElementById('cpfResponsavel').value,
         telefoneAluno: document.getElementById('telefoneAluno').value,
