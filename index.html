@@ -113,16 +113,19 @@
 
 <script>
 async function cadastrar() {
+async function cadastrar() {
   try {
-    await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
+    const res = await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-       idadeAluno: document.getElementById('idadeAluno').value,
-idadeResponsavel: document.getElementById('idadeResponsavel').value,
         nomeAluno: document.getElementById('nome').value,
-        cpfAluno: document.getElementById('cpf').value,
+        idadeAluno: document.getElementById('idadeAluno')?.value,
+
         nomeResponsavel: document.getElementById('nomeResponsavel').value,
+        idadeResponsavel: document.getElementById('idadeResponsavel')?.value,
+
+        cpfAluno: document.getElementById('cpf').value,
         cpfResponsavel: document.getElementById('cpfResponsavel').value,
         telefoneAluno: document.getElementById('telefoneAluno').value,
         telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
@@ -130,9 +133,12 @@ idadeResponsavel: document.getElementById('idadeResponsavel').value,
       })
     });
 
-    alert('Cadastrado com sucesso!');
-  } catch {
+    const texto = await res.text();
+    alert(texto);
+
+  } catch (err) {
     alert('Erro ao cadastrar');
+    console.log(err);
   }
 }
 
