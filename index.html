@@ -23,8 +23,7 @@
 
 <input id="telefoneResponsavel" placeholder="Telefone do responsável"><br>
 <input id="telefoneAluno" placeholder="Telefone do aluno"><br>
-<input id="fotoInstituicao" placeholder="Link da foto do colégio"><br>
-<input id="fotoAcademia" placeholder="Link da foto da academia"><br>
+
 <button onclick="cadastrar()">Cadastrar</button>
 
 <hr>
@@ -55,9 +54,7 @@ async function cadastrar() {
   telefoneAluno: document.getElementById('telefoneAluno').value,
   telefoneResponsavel: document.getElementById('telefoneResponsavel').value,
 
-  fotoInstituicao: document.getElementById('fotoInstituicao').value,
-  fotoAcademia: document.getElementById('fotoAcademia').value,
-
+  
   turno: 'Noturno'
 })
     });
