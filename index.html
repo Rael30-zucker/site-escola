@@ -206,13 +206,23 @@ async function excluir(id) {
 }
 
 async function editar(id) {
-  const novoNome = prompt('Novo nome:');
+  const nomeAluno = prompt('Nome do aluno:');
+  const nomeResponsavel = prompt('Nome do responsável:');
+  const cpfAluno = prompt('CPF do aluno:');
+  const cpfResponsavel = prompt('CPF do responsável:');
+  const telefoneAluno = prompt('Telefone do aluno:');
+  const telefoneResponsavel = prompt('Telefone do responsável:');
 
   await fetch('https://sistema-escola-2njr.onrender.com/alunos/' + id, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      nomeAluno: novoNome
+      nomeAluno,
+      nomeResponsavel,
+      cpfAluno,
+      cpfResponsavel,
+      telefoneAluno,
+      telefoneResponsavel
     })
   });
 
