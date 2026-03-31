@@ -113,7 +113,6 @@
 
 <script>
 async function cadastrar() {
-async function cadastrar() {
   try {
     const res = await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
       method: 'POST',
@@ -121,10 +120,8 @@ async function cadastrar() {
       body: JSON.stringify({
         nomeAluno: document.getElementById('nome').value,
         idadeAluno: document.getElementById('idadeAluno')?.value,
-
         nomeResponsavel: document.getElementById('nomeResponsavel').value,
         idadeResponsavel: document.getElementById('idadeResponsavel')?.value,
-
         cpfAluno: document.getElementById('cpf').value,
         cpfResponsavel: document.getElementById('cpfResponsavel').value,
         telefoneAluno: document.getElementById('telefoneAluno').value,
