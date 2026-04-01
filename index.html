@@ -87,8 +87,8 @@
 
   <input id="nome" placeholder="Nome do aluno">
   <input id="nomeResponsavel" placeholder="Nome do responsável">
-<input id="idadeAluno" type="number" placeholder="Idade do aluno"><br>
-<input id="idadeResponsavel" type="number" placeholder="Idade do responsável"><br>
+<input id="idadeAluno" type="number" placeholder="Idade do aluno (apenas números)"><br>
+<input id="idadeResponsavel" type="number" placeholder="Idade do responsável (apenas números)"><br>
   <input id="cpfResponsavel" placeholder="CPF do responsável">
   <input id="cpf" placeholder="CPF do aluno">
 
@@ -113,11 +113,20 @@
 
 <script>
 async function cadastrar() {
-  try {
+  try { 
+    const idadeAluno = document.getElementById('idadeAluno').value;
+const idadeResponsavel = document.getElementById('idadeResponsavel').value;
+
+if (!idadeAluno || !idadeResponsavel) {
+  alert('Digite apenas números nas idades!');
+  return;
+}
     const res = await fetch('https://sistema-escola-2njr.onrender.com/cadastro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      body: JSON.stringify({ 
+        idadeAluno: Number(idadeAluno),
+idadeResponsavel: Number(idadeResponsavel),
         nomeAluno: document.getElementById('nome').value,
         nomeResponsavel: document.getElementById('nomeResponsavel').value,
         idadeAluno: Number(document.getElementById('idadeAluno').value),
